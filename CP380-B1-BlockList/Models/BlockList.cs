@@ -25,7 +25,8 @@ namespace CP380_B1_BlockList.Models
         public void AddBlock(Block block)
         {
             // TODO
-            block.PreviousHash = Chain[Chain.Count - 1].Hash;
+            int chainlength = Chain.Count - 1;
+            block.PreviousHash = Chain[chainlength].Hash;
             block.Mine(Difficulty);
             Chain.Add(block);
         }
@@ -33,17 +34,17 @@ namespace CP380_B1_BlockList.Models
         public bool IsValid()
         {
             // TODO
-            string CValue = new string('c', Difficulty);
+            string CValue = new string('C', Difficulty);
             int i;
-            for ( var i = 0; i < Chain.Count; i++)
+            for (i = 0; i < Chain.Count; i++)
             {
-                if (!Chain[i].Hash.StartsWith("CC"))
+                if (!Chain[i].Hash.StartsWith(CValue) || (i > 0 && !Chain[i].PreviousHash.Equals(Chain[i - 1].Hash)))
                 {
-                    return(false);
-
+                    return false;
                 }
+
             }
-            return(true);
+            return true;
         }
     }
 }

@@ -48,13 +48,14 @@ namespace CP380_B1_BlockList.Models
         {
             // TODO
             string CValue = new('C', difficulty);
-            while (!Has.StartsWith(CValue)) { 
-
+            while (!Hash.StartsWith(CValue))
             {
-                    Nonce += 1;
+
+                Nonce += 1;
                 Hash = CalculateHash();
-                
+
             }
         }
     }
+
 }
